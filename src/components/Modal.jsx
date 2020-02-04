@@ -23,9 +23,9 @@ export default function Modal(props) {
             if (userAnswer.length > 0) {
                 if (userAnswer.length === correct.length) {
                     for (var i = 0; i < userAnswer.length; i++) {
-                        if (correct.indexOf(userAnswer[i]) < 1) {
+                        if (correct.indexOf(userAnswer[i]) === -1) {
                             return q.id;
-                        }
+                        } else return true
                     }
                 } else {
                     return q.id
@@ -41,6 +41,9 @@ export default function Modal(props) {
             }
         }
     })
+
+    console.log('answ', answers);
+    console.log('causer', correctUserAnswers);
 
     if (answers.some((e) => e.userAnswer === null)) {
         return (
