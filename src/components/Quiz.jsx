@@ -13,10 +13,8 @@ class Quiz extends React.Component {
         this.state = {
             nr: 0,
             total: data.length,
-            showButton: false,
             questions: data.questions,
             answers: null,
-            score: 0
         };
         this.setAnswer = this.setAnswer.bind(this);
     }

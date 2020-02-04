@@ -20,7 +20,6 @@ import Result from "./components/Result";
       })
     }
 
-
     render() {
       return (
           <div className="App">

@@ -21,12 +21,17 @@ export default function Modal(props) {
         const userAnswer = q.userAnswer;
         if (Array.isArray(userAnswer)) {
             if (userAnswer.length > 0) {
-                for (var i = 0; i < userAnswer.length; i++) {
-                    if (correct.indexOf(userAnswer[i]) === -1) return q.id;
+                if (userAnswer.length === correct.length) {
+                    for (var i = 0; i < userAnswer.length; i++) {
+                        if (correct.indexOf(userAnswer[i]) < 1) {
+                            return q.id;
+                        }
+                    }
+                } else {
+                    return q.id
                 }
-                return true
             } else {
-                return false
+                return q.id
             }
         } else {
             if (q.userAnswer === q.correct) {
@@ -40,7 +45,7 @@ export default function Modal(props) {
     if (answers.some((e) => e.userAnswer === null)) {
         return (
             <div>
-                <Button className='btn' variant="outlined" color="blue" onClick={handleClickOpen}>
+                <Button className='btn' variant="outlined" onClick={handleClickOpen}>
                     Ответить
                 </Button>
                 <Dialog
@@ -63,8 +68,9 @@ export default function Modal(props) {
             </div>
         );
     } else {
-        return <Button className='btn'  variant="outlined" onClick={() => props.showResult(correctUserAnswers)} color="blue">
-           Ответить
+        return <Button className='btn' variant="outlined" onClick={() => props.showResult(correctUserAnswers)}
+                       color="blue">
+            Ответить
         </Button>
     }
 
