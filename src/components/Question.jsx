@@ -5,7 +5,7 @@ import TypeCheckbox from "./questionTypes/TypeCheckbox";
 import TypeSelect from "./questionTypes/TypeSelect";
 
 
-function Question(props) {
+const Question = (props) => {
     const que = props.question;
 
     let questionItem = (question) => {

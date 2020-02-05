@@ -1,15 +1,21 @@
 import React from 'react';
 
-class Result extends React.Component {
-
-    render() {
-        const points = this.props.result.filter(i => i === true);
-        const incorrect = this.props.result.filter(i => i !== true);
+const Result = (props) => {
+        const points = props.result.filter(i => i === true);
+        const incorrect = props.result.filter(i => i !== true);
+        const incorAnswers = props.questions.filter(i => incorrect.includes(i.id));
         let assessment = null;
         if (incorrect.length > 0) {
             assessment = <h2>
-                К сожалению Вы допустили ошибку в вопросах с номерами :
-                {incorrect.map(i => ` ${i + 1}, `)}</h2>
+                <p>К сожалению Вы допустили ошибку в вопросах с номерами :
+                    {incorrect.map(i => i + 1).join(', ')}
+                </p>
+                Правильными ответами в данных вопрос были:
+                {incorAnswers.map((i, key) => <div key={key}>
+                        {i.id + 1} : {Array.isArray(i.correct) ? i.correct.join(', ') : i.correct}
+                    </div>
+                )}
+            </h2>
         } else {
             assessment = <h2>Поздравлем, Ваши познания Географии - блестательны! </h2>
         }
@@ -20,7 +26,6 @@ class Result extends React.Component {
                 {assessment}
             </div>
         );
-    }
 };
 
 export default Result
